@@ -16,6 +16,6 @@
 /** @type {import('@adonisjs/framework/src/Route/Manager'} */
 const Route = use('Route')
 
-Route.get('/', () => {
-  return { greeting: 'Hello world in JSON' }
-})
+Route.get('/', 'PessoaController.index')
+
+Route.post('/create', 'PessoaController.store')
