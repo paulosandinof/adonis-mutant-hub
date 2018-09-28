@@ -1,5 +1,5 @@
 'use strict'
-
+//TODO implementar restrições dos dados
 const Schema = use('Schema')
 
 class PessoaSchema extends Schema {
@@ -12,6 +12,10 @@ class PessoaSchema extends Schema {
       table.string('localizacao')
       table.integer('mutacao')
       table.timestamps()
+    })
+
+    this.table('pessoas', (table)=>{
+      table.renameColumn('user_id', 'id')
     })
   }
 

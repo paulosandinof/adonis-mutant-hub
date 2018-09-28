@@ -10,7 +10,7 @@ class PessoaController {
    * Show a list of all pessoas.
    * GET pessoas
    */
-  async index ({ request, response, view }) {
+  async index ({ request, response }) {
 
     const pessoas = await Pessoa.all()
 
@@ -22,18 +22,11 @@ class PessoaController {
   }
 
   /**
-   * Render a form to be used for creating a new pessoa.
-   * GET pessoas/create
-   */
-  async create ({ request, response, view }) {
-  }
-
-  /**
    * Create/save a new pessoa.
    * POST pessoas
    */
   async store ({ request, response }) {
-
+    //TODO tratamento de exceção
     const { nome, idade, sexo, localizacao } = request.post()
 
     const pessoa = new Pessoa()
@@ -42,6 +35,7 @@ class PessoaController {
     pessoa.idade = idade
     pessoa.sexo = sexo
     pessoa.localizacao = localizacao
+    pessoa.mutacao = 0
 
     await pessoa.save()
 
@@ -56,14 +50,15 @@ class PessoaController {
    * Display a single pessoa.
    * GET pessoas/:id
    */
-  async show ({ params, request, response, view }) {
-  }
+  async show ({ params, request, response }) {
+    //TODO tratamento de exceção
+    const pessoa = await Pessoa.find(params.id)
 
-  /**
-   * Render a form to update an existing pessoa.
-   * GET pessoas/:id/edit
-   */
-  async edit ({ params, request, response, view }) {
+    return response.status(200).json({
+      mensagem: 'Usuário',
+      dados: pessoa
+    })
+
   }
 
   /**
@@ -71,6 +66,23 @@ class PessoaController {
    * PUT or PATCH pessoas/:id
    */
   async update ({ params, request, response }) {
+    //TODO tratamento de exceção e de localização
+    const { nome, idade, sexo, localizacao } = request.post()
+
+    const pessoa = await Pessoa.find(params.id)
+
+    pessoa.nome = nome
+    pessoa.idade = idade
+    pessoa.sexo = sexo
+    pessoa.localizacao = localizacao
+
+    await pessoa.save()
+
+    return response.status(201).json({
+      mensagem: 'Usuário atualizado',
+      dados: pessoa
+    })
+
   }
 
   /**

@@ -16,6 +16,10 @@
 /** @type {import('@adonisjs/framework/src/Route/Manager'} */
 const Route = use('Route')
 
-Route.get('/', 'PessoaController.index')
+Route.get('/pessoas', 'PessoaController.index')
 
-Route.post('/create', 'PessoaController.store')
+Route.post('/pessoas', 'PessoaController.store')
+
+Route.get('/pessoas/:id', 'PessoaController.show')
+
+Route.put('/pessoas/:id', 'PessoaController.update')
