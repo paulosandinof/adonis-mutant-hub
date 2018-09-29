@@ -48,11 +48,11 @@ class PessoaController {
 
   /**
    * Display a single pessoa.
-   * GET pessoas/:id
+   * GET pessoas/:pessoa_id
    */
   async show ({ params, request, response }) {
     //TODO tratamento de exceção
-    const pessoa = await Pessoa.find(params.id)
+    const pessoa = await Pessoa.find(params.pessoa_id)
 
     return response.status(200).json({
       mensagem: 'Usuário',
@@ -63,13 +63,13 @@ class PessoaController {
 
   /**
    * Update pessoa details.
-   * PUT or PATCH pessoas/:id
+   * PUT or PATCH pessoas/:pessoa_id
    */
   async update ({ params, request, response }) {
     //TODO tratamento de exceção e de localização
     const { nome, idade, sexo, localizacao } = request.post()
 
-    const pessoa = await Pessoa.find(params.id)
+    const pessoa = await Pessoa.find(params.pessoa_id)
 
     pessoa.nome = nome
     pessoa.idade = idade
@@ -78,7 +78,7 @@ class PessoaController {
 
     await pessoa.save()
 
-    return response.status(201).json({
+    return response.status(200).json({
       mensagem: 'Usuário atualizado',
       dados: pessoa
     })
@@ -87,9 +87,19 @@ class PessoaController {
 
   /**
    * Delete a pessoa with id.
-   * DELETE pessoas/:id
+   * DELETE pessoas/:pessoa_id
    */
   async destroy ({ params, request, response }) {
+
+    const pessoa = await Pessoa.find(params.pessoa_id)
+
+    await pessoa.delete()
+
+    return response.status(200).json({
+      mensagem: 'Usuário excluído',
+      dados: pessoa
+    })
+
   }
 }
 

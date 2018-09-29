@@ -16,10 +16,14 @@
 /** @type {import('@adonisjs/framework/src/Route/Manager'} */
 const Route = use('Route')
 
+// Rotas de CRUD para Pessoas
 Route.get('/pessoas', 'PessoaController.index')
-
 Route.post('/pessoas', 'PessoaController.store')
+Route.get('/pessoas/:pessoa_id', 'PessoaController.show')
+Route.put('/pessoas/:pessoa_id', 'PessoaController.update')
+Route.delete('/pessoas/:pessoa_id', 'PessoaController.destroy')
 
-Route.get('/pessoas/:id', 'PessoaController.show')
-
-Route.put('/pessoas/:id', 'PessoaController.update')
+// Rotas dos relatos de doenças
+Route.get('/relatorios', 'RelatorioController.index')
+Route.post('/relatorios/:pessoa_id/:flag_mutacao', 'RelatorioController.store')
+Route.get('/relatorios/:id', 'RelatorioController.show')

@@ -1,5 +1,8 @@
 'use strict'
 
+const Relatorio = use('App/Models/Relatorio')
+const Pessoa = use('App/Models/Pessoa')
+
 /**
  * Resourceful controller for interacting with relatorios
  */
@@ -9,20 +12,34 @@ class RelatorioController {
    * GET relatorios
    */
   async index ({ request, response, view }) {
-  }
 
-  /**
-   * Render a form to be used for creating a new relatorio.
-   * GET relatorios/create
-   */
-  async create ({ request, response, view }) {
+    const relatorios = await Relatorio.all()
+
+    return response.status(200).json({
+      mensagem: 'Todos os relatórios',
+      dados: relatorios
+    })
+
   }
 
   /**
    * Create/save a new relatorio.
-   * POST relatorios
+   * POST relatorios/:pessoa_id/:flag_mutacao
    */
-  async store ({ request, response }) {
+  async store ({ params, request, response }) {
+    
+    const pessoa = await Pessoa.find(params.pessoa_id)
+
+    const relatorio = new Relatorio()
+    relatorio.mutacao = params.flag_mutacao
+  
+    await pessoa.relatorios().save(relatorio)
+
+    return response.status(201).json({
+      mensagem: 'Relato criado com sucesso',
+      dados: relatorio
+    })
+
   }
 
   /**
@@ -30,13 +47,18 @@ class RelatorioController {
    * GET relatorios/:id
    */
   async show ({ params, request, response, view }) {
-  }
 
-  /**
-   * Render a form to update an existing relatorio.
-   * GET relatorios/:id/edit
-   */
-  async edit ({ params, request, response, view }) {
+    // const relatorio = await Relatorio.find(params.id)
+
+    // return response.status(200).json({
+    //   mensagem: "Relato",
+    //   dados: relatorio
+    // })
+
+    const relatorio = await Relatorio.find(params.id)
+
+    return relatorio.pessoa()
+
   }
 
   /**
