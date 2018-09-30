@@ -6,10 +6,10 @@ class PessoaSchema extends Schema {
   up () {
     this.create('pessoas', (table) => {
       table.increments()
-      table.string('nome')
-      table.integer('idade')
-      table.enu('sexo', ['masculino', 'feminino'])
-      table.string('localizacao')
+      table.string('nome').notNullable()
+      table.integer('idade').notNullable()
+      table.enu('sexo', ['masculino', 'feminino']).notNullable()
+      table.string('localizacao', 255).notNullable()
       table.integer('mutacao')
       table.timestamps()
     })
