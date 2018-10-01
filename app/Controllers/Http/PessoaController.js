@@ -15,7 +15,7 @@ class PessoaController {
     const pessoas = await Pessoa.all()
 
     return response.status(200).json({
-      mensagem: "Todos os usuários",
+      mensagem: 'Todos os usuários',
       dados: pessoas
     })
 
@@ -49,19 +49,19 @@ class PessoaController {
       if(err.errno === 1048){
         erro = {
           codigo: 1048,
-          mensagem: "Preencha corretamente todos os campos"
+          mensagem: 'Preencha corretamente todos os campos'
         }
       }
       if(err.errno === 1265){
         erro = {
           codigo: 1265,
-          mensagem: "Preencha corretamente o sexo com masculino ou feminino"
+          mensagem: 'Preencha corretamente o sexo com masculino ou feminino'
         }
       }
       if(err.errno === 1366){
         erro = {
           codigo: 1366,
-          mensagem: "Preencha corretamente a idade da pessoa"
+          mensagem: 'Preencha corretamente a idade da pessoa'
         }
       }
       return response.status(400).json({
@@ -75,19 +75,18 @@ class PessoaController {
    * GET pessoas/:pessoa_id
    */
   async show ({ params, request, response }) {
-    try{
-      const pessoa = await Pessoa.findOrFail(params.pessoa_id)
+      const pessoa = await Pessoa.find(params.pessoa_id)
 
-      return response.status(200).json({
-        mensagem: 'Usuário',
-        dados: pessoa
-      })
-    }catch(err){
-      console.log(err)
-      return response.status(400).json({
-        erro: "Usuário não encontrado"
-      })
-    }
+      if(pessoa){
+        return response.status(200).json({
+          mensagem: 'Usuário',
+          dados: pessoa
+        })
+      }else{
+        return response.status(400).json({
+          erro: 'Usuário não encontrado'
+        })
+      }
   }
 
   /**
@@ -95,25 +94,57 @@ class PessoaController {
    * PUT or PATCH pessoas/:pessoa_id
    */
   async update ({ params, request, response }) {
-    //TODO tratamento de exceção e de localização
-    try {
+    try{
       const { nome, idade, sexo, localizacao } = request.post()
-
       const pessoa = await Pessoa.find(params.pessoa_id)
   
-      pessoa.nome = nome
-      pessoa.idade = idade
-      pessoa.sexo = sexo
-      pessoa.localizacao = localizacao
-  
-      await pessoa.save()
-  
-      return response.status(200).json({
-        mensagem: 'Usuário atualizado',
-        dados: pessoa
-      }) 
-    } catch (err) {
-      
+      if(pessoa){
+        pessoa.nome = nome ? nome : null
+        pessoa.idade = idade ? idade : null
+        pessoa.sexo = sexo ? sexo : null
+
+        let mensagem = null
+        if(pessoa.localizacao === 'Quarentena'){
+          mensagem = 'Usuário atualizado, porém ele está em quarentena e sua localização não foi alterada'
+        }else{
+          mensagem = 'Usuário atualizado'
+          pessoa.localizacao = localizacao ? localizacao : null
+        }
+    
+        await pessoa.save()
+
+        return response.status(201).json({
+          mensagem: mensagem,
+          dados: pessoa
+        })
+      }else{
+        return response.status(400).json({
+          erro: 'Usuário não encontrado'
+        })
+      }
+    }catch(err){
+      let erro = {}
+      if(err.errno === 1048){
+        erro = {
+          codigo: 1048,
+          mensagem: 'Preencha corretamente todos os campos'
+        }
+      }
+      if(err.errno === 1265){
+        erro = {
+          codigo: 1265,
+          mensagem: 'Preencha corretamente o sexo com masculino ou feminino'
+        }
+      }
+      if(err.errno === 1366){
+        erro = {
+          codigo: 1366,
+          mensagem: 'Preencha corretamente a idade da pessoa'
+        }
+      }
+      return response.status(400).json({
+        erro: erro
+      })
     }
 
   }
@@ -126,13 +157,18 @@ class PessoaController {
 
     const pessoa = await Pessoa.find(params.pessoa_id)
 
-    await pessoa.delete()
+    if(pessoa){
+      await pessoa.delete()
 
-    return response.status(200).json({
-      mensagem: 'Usuário excluído',
-      dados: pessoa
-    })
-
+      return response.status(200).json({
+        mensagem: 'Usuário excluído',
+        dados: pessoa
+      })
+    }else{
+      return response.status(400).json({
+        erro: 'Usuário não encontrado'
+      })
+    }
   }
 }
 
