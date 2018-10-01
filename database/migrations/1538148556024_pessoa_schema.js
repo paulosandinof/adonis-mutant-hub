@@ -1,11 +1,10 @@
 'use strict'
-//TODO implementar restrições dos dados
 const Schema = use('Schema')
 
 class PessoaSchema extends Schema {
   up () {
     this.create('pessoas', (table) => {
-      table.increments()
+      table.uuid('id').primary()
       table.string('nome').notNullable()
       table.integer('idade').notNullable()
       table.enu('sexo', ['masculino', 'feminino']).notNullable()

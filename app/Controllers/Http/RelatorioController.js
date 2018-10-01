@@ -1,5 +1,5 @@
 'use strict'
-
+const uuid = require('uuid/v4')
 const Relatorio = use('App/Models/Relatorio')
 const Pessoa = use('App/Models/Pessoa')
 
@@ -14,6 +14,19 @@ class RelatorioController {
   async index ({ request, response, view }) {
 
     const relatorios = await Relatorio.all()
+
+    let quantidadeTotalDePessoas = await Pessoa.getCount()
+
+    let quantidadeDeDenteDeNeon = await Pessoa.query().where('mutacao', '1').getCount()
+    let quantidadeDeOlhoNaNuca = await Pessoa.query().where('mutacao', '2').getCount()
+
+    // let quantidadeDeMutantes = quantidadeDeDenteDeNeon + quantidadeDeOlhoNaNuca
+    // let quantidadeDeNaoMutantes = quantidadeTotalDePessoas - quantidadeDeMutantes
+
+    let quantidadeDeMutantes = quantidadeDeDenteDeNeon + quantidadeDeOlhoNaNuca
+    let quantidadeDeNaoMutantes = quantidadeTotalDePessoas - quantidadeDeMutantes
+    
+    console.log(quantidadeDeNaoMutantes)
 
     return response.status(200).json({
       mensagem: 'Todos os relatórios',
@@ -34,6 +47,7 @@ class RelatorioController {
     // Cria um novo relatório
     const relatorio = new Relatorio()
     
+    relatorio.primaryKeyValue = uuid() 
     // Atribui ao relatório a flag de mutação recebida
     relatorio.mutacao = params.flag_mutacao
   

@@ -1,5 +1,5 @@
 'use strict'
-
+const uuid = require('uuid/v4')
 const Pessoa = use('App/Models/Pessoa')
 
 /**
@@ -32,6 +32,7 @@ class PessoaController {
 
       // Como a função notNullable do Lucid permite valores vazios
       // temos que fazer a verificação para poder dar throw no erro de campo nulo
+      pessoa.id = uuid()
       pessoa.nome = nome ? nome : null
       pessoa.idade = idade ? idade : null
       pessoa.sexo = sexo ? sexo : null
@@ -40,11 +41,14 @@ class PessoaController {
   
       await pessoa.save()
 
+      console.log(pessoa.id)
+
       return response.status(201).json({
         mensagem: 'Usuário criado com sucesso',
         dados: pessoa
       })
     }catch(err){
+      //console.log(err)
       let erro = {}
       if(err.errno === 1048){
         erro = {
