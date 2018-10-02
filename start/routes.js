@@ -25,5 +25,6 @@ Route.delete('/pessoas/:pessoa_id', 'PessoaController.destroy')
 
 // Rotas dos relatos de doenças
 Route.get('/relatorios', 'RelatorioController.index')
+Route.get('/relatorios/porcentagem', 'RelatorioController.indexPercentage')
 Route.post('/relatorios/:pessoa_id/:flag_mutacao', 'RelatorioController.store')
-Route.get('/relatorios/:id', 'RelatorioController.show')
+Route.get('/relatorios/:relatorio_id', 'RelatorioController.show')

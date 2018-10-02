@@ -48,7 +48,6 @@ class PessoaController {
         dados: pessoa
       })
     }catch(err){
-      //console.log(err)
       let erro = {}
       if(err.errno === 1048){
         erro = {
