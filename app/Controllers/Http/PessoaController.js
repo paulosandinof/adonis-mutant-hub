@@ -7,7 +7,7 @@ const Pessoa = use('App/Models/Pessoa')
  */
 class PessoaController {
   /**
-   * Show a list of all pessoas.
+   * Retorna uma lista de todas as pessoas
    * GET pessoas
    */
   async index ({ request, response }) {
@@ -15,14 +15,14 @@ class PessoaController {
     const pessoas = await Pessoa.all()
 
     return response.status(200).json({
-      mensagem: 'Todos os usuários',
+      mensagem: 'Todas as pessoas',
       dados: pessoas
     })
 
   }
 
   /**
-   * Create/save a new pessoa.
+   * Cria e salva uma nova pessoa
    * POST pessoas
    */
   async store ({ request, response }) {
@@ -41,10 +41,8 @@ class PessoaController {
   
       await pessoa.save()
 
-      console.log(pessoa.id)
-
       return response.status(201).json({
-        mensagem: 'Usuário criado com sucesso',
+        mensagem: 'Pessoa criada com sucesso',
         dados: pessoa
       })
     }catch(err){
@@ -74,7 +72,7 @@ class PessoaController {
   }
 
   /**
-   * Display a single pessoa.
+   * Retorna uma pessoa específica
    * GET pessoas/:pessoa_id
    */
   async show ({ params, request, response }) {
@@ -82,18 +80,37 @@ class PessoaController {
 
       if(pessoa){
         return response.status(200).json({
-          mensagem: 'Usuário',
+          mensagem: 'Pessoa',
           dados: pessoa
         })
       }else{
         return response.status(400).json({
-          erro: 'Usuário não encontrado'
+          erro: 'Pessoa não encontrada'
         })
       }
   }
 
   /**
-   * Update pessoa details.
+   * Retorna uma lista de relatórios associados à pessoa específica
+   * GET pessoas/:pessoa_id/relatorios
+   */
+  async showReports ({ params, request, response }) {
+    const pessoa = await Pessoa.find(params.pessoa_id)
+
+    if(pessoa){
+      return response.status(200).json({
+        mensagem: 'Relatórios associados a esta pessoa',
+        dados: await pessoa.relatorios().fetch()
+      })
+    }else{
+      return response.status(400).json({
+        erro: 'Pessoa não encontrada'
+      })
+    }
+  }
+
+  /**
+   * Atualiza informações sobre uma pessoa específica
    * PUT or PATCH pessoas/:pessoa_id
    */
   async update ({ params, request, response }) {
@@ -108,9 +125,9 @@ class PessoaController {
 
         let mensagem = null
         if(pessoa.localizacao === 'Quarentena'){
-          mensagem = 'Usuário atualizado, porém ele está em quarentena e sua localização não foi alterada'
+          mensagem = 'Pessoa atualizada, porém ela está em quarentena e sua localização não foi alterada'
         }else{
-          mensagem = 'Usuário atualizado'
+          mensagem = 'Pessoa atualizada'
           pessoa.localizacao = localizacao ? localizacao : null
         }
     
@@ -122,7 +139,7 @@ class PessoaController {
         })
       }else{
         return response.status(400).json({
-          erro: 'Usuário não encontrado'
+          erro: 'Pessoa não encontrado'
         })
       }
     }catch(err){
@@ -153,7 +170,7 @@ class PessoaController {
   }
 
   /**
-   * Delete a pessoa with id.
+   * Deleta uma pessoa específica
    * DELETE pessoas/:pessoa_id
    */
   async destroy ({ params, request, response }) {
@@ -164,12 +181,12 @@ class PessoaController {
       await pessoa.delete()
 
       return response.status(200).json({
-        mensagem: 'Usuário excluído',
+        mensagem: 'Pessoa excluída com sucesso',
         dados: pessoa
       })
     }else{
       return response.status(400).json({
-        erro: 'Usuário não encontrado'
+        erro: 'Pessoa não encontrada'
       })
     }
   }

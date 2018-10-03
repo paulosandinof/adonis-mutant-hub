@@ -8,7 +8,7 @@ const Pessoa = use('App/Models/Pessoa')
  */
 class RelatorioController {
   /**
-   * Show a list of all relatorios.
+   * Retorna uma lista de todos os relatorios
    * GET relatorios
    */
   async index ({ request, response, view }) {
@@ -22,7 +22,7 @@ class RelatorioController {
     })
   }
     /**
-   * Create/save a new relatorio.
+   * Retorna os relatorios de porcentagem da população
    * GET relatorios/porcentagem
    */
   async indexPercentage({ request, response }){
@@ -46,16 +46,16 @@ class RelatorioController {
     return response.status(200).json({
       mensagem: "Relatórios por porcentagem",
       dados: {
-        porcentagemDeMutantes: (quantidadeDeMutantes / quantidadeTotalDePessoas) * 100,
-        porcentagemDeNaoMutantes: (quantidadeDeNaoMutantes / quantidadeTotalDePessoas) * 100,
-        porcentagemDeDenteDeNeon: (quantidadeDeDenteDeNeon / quantidadeTotalDePessoas) * 100,
-        porcentagemDeOlhoNaNuca: (quantidadeDeOlhoNaNuca / quantidadeTotalDePessoas) * 100 
+        porcentagemDeMutantes: ((quantidadeDeMutantes / quantidadeTotalDePessoas) * 100).toFixed(2),
+        porcentagemDeNaoMutantes: ((quantidadeDeNaoMutantes / quantidadeTotalDePessoas) * 100).toFixed(2),
+        porcentagemDeDenteDeNeon: ((quantidadeDeDenteDeNeon / quantidadeTotalDePessoas) * 100).toFixed(2),
+        porcentagemDeOlhoNaNuca: ((quantidadeDeOlhoNaNuca / quantidadeTotalDePessoas) * 100).toFixed(2) 
       }
     })
   }
 
   /**
-   * Create/save a new relatorio.
+   * Cria e salva um novo relatorio
    * POST relatorios/:pessoa_id/:flag_mutacao
    */
   async store ({ params, request, response }) {
@@ -95,29 +95,52 @@ class RelatorioController {
       }
 
       return response.status(201).json({
-        mensagem: 'Relato criado com sucesso',
+        mensagem: 'Relatorio criado com sucesso',
         dados: await relatorio.pessoa().fetch()
       })
     }else{
       return response.status(400).json({
-        erro: 'Usuário não encontrado'
+        erro: 'Pessoa não encontrada'
       })
     }
   }
 
   /**
-   * Display a single relatorio.
+   * Retorna um relatório específico
    * GET relatorios/:relatorio_id
    */
   async show ({ params, request, response, view }) {
-    
     // Acha o relatório na tabela de relatórios
     const relatorio = await Relatorio.find(params.relatorio_id)
 
     if(relatorio){
-
+      return response.status(200).json({
+        mensagem: 'Relatório',
+        dados: relatorio
+      })
     }else{
+      return response.status(400).json({
+        erro: 'Relatório não encontrado'
+      })
+    }
+  }
 
+  /**
+   * Retorna a pessoa associada ao relatório específico
+   * GET relatorios/:relatorio_id/pessoa
+   */
+  async showPerson ({ params, request, response }) {
+    const relatorio = await Relatorio.find(params.relatorio_id)
+
+    if(relatorio){
+      return response.status(200).json({
+        mensagem: 'Pessoa associada a este relatório',
+        dados: await relatorio.pessoa().fetch()
+      })
+    }else{
+      return response.status(400).json({
+        erro: 'Relatório não encontrado'
+      })
     }
   }
 }
