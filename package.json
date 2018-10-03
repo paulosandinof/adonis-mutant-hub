@@ -3,6 +3,9 @@
   "version": "4.1.0",
   "adonis-version": "4.1.0",
   "description": "Adonisjs boilerplate for API server with pre-configured JWT",
+  "apidoc":{
+    "title": "MutantHub Api Documentation"
+  },
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
