@@ -1,8 +1,8 @@
 {
-  "name": "adonis-api-app",
-  "version": "4.1.0",
+  "name": "mutanthub-api",
+  "version": "0.0.9",
   "adonis-version": "4.1.0",
-  "description": "Adonisjs boilerplate for API server with pre-configured JWT",
+  "description": "Uma Api para cadastrar pessoas, cadastrar relatos sobre pessoas que estão com mutações e gerar relatórios dos mutantes",
   "apidoc":{
     "title": "MutantHub Api Documentation"
   },

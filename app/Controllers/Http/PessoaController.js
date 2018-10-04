@@ -284,8 +284,32 @@ class PessoaController {
   }
 
   /**
-   * Deleta uma pessoa específica
-   * DELETE pessoas/:pessoa_id
+   * @api {delete} /pessoas/:pessoa_id Excluir uma pessoa específica
+   * @apiName DeletePessoa
+   * @apiGroup Pessoas
+   * 
+   * @apiParam {String} pessoa_id Identificador único da pessoa
+   * 
+   * @apiSuccess {Object} dados Um objeto com todas as informações da pessoa
+   * @apiSuccessExample Exemplo de resposta:
+   * {
+   *    "dados": {
+   *        "id": "10400ddb-2620-4fa9-864f-a44dad641add",
+   *        "nome": "Paulo Sandino",
+   *        "idade": 22,
+   *        "sexo": "masculino",
+   *        "localizacao": "Quarentena",
+   *        "mutacao": 2,
+   *        "created_at": "2018-10-01 11:18:51",
+   *        "updated_at": "2018-10-01 13:56:36" 
+   *    }
+   * }
+   * 
+   * @apiError {String} erro Mensagem de erro
+   * @apiErrorExample Exemplo de erro:
+   * {
+   *    "erro": "Pessoa não encontrada"
+   * }
    */
   async destroy ({ params, request, response }) {
 

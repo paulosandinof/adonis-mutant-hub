@@ -41,14 +41,17 @@ cp .env.example ./.env
 
 - Neste novo arquivo criado, você precisará inserir as informações sobre o seu banco de dados:
 ```
-APP_KEY=defina um valor para sua APP KEY de pelo menos 16 caracteres
-
 DB_CONNECTION=mysql
 DB_HOST=O endereço de host do seu banco de dados, geralmente 127.0.0.1
 DB_PORT= A porta utilizada pelo seu banco de dados, geralmente 3306
 DB_USER= O usuário do seu banco de dados
 DB_PASSWORD= A senha do seu banco de dados
 DB_DATABASE= O nome do banco schema que você criou para o projeto
+```
+
+- Após configurar o banco de dados, você precisará gerar uma `APP_KEY` para o seu arquivo `.env`, para isso:
+```
+adonis key:generate
 ```
 
 - Configurado o arquivo `.env`, você precisará criar as migrations do projeto para criar as tabelas no banco de dados:
@@ -63,4 +66,16 @@ adonis serve --dev
 
 ## Endpoints da API
 
-**TODO**
+- get    /pessoas
+- post   /pessoas
+- get    /pessoas/:pessoa_id
+- get    /pessoas/:pessoa_id/relatorios
+- put    /pessoas/:pessoa_id
+- delete /pessoas/:pessoa_id
+- get    /relatorios
+- get    /relatorios/porcentagem
+- post   /relatorios/:pessoa_id/:flag_mutacao
+- get    /relatorios/:relatorio_id
+- get    /relatorios/:relatorio_id/pessoa
+
+- TODO: Conferir os endpoints e verificar a flag das doenças
