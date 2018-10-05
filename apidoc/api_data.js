@@ -116,7 +116,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Exemplo de erro:",
-          "content": "{\n   \"erro\": \"Usuário não encontrado\"\n}",
+          "content": "{\n   \"erro\": \"Pessoa não encontrada\"\n}",
           "type": "json"
         }
       ]
@@ -209,7 +209,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Exemplo de erro:",
-          "content": "{\n   \"erro\": \"Usuário não encontrado\"\n}",
+          "content": "{\n   \"erro\": \"Pessoa não encontrada\"\n}",
           "type": "json"
         }
       ]
@@ -635,6 +635,31 @@ define({ "api": [
         {
           "title": "Exemplo de resposta:",
           "content": "{\n   \"dados\": {\n       \"id\": \"d7dedfd4-efdb-4126-8911-74e40fa5509f\",\n       \"nome\": \"Nathanael Derick\",\n       \"idade\": 19,\n       \"sexo\": \"masculino\",\n       \"localizacao\": \"Quarentena\",\n       \"mutacao\": 1,\n       \"created_at\": \"2018-10-01 11:19:57\",\n       \"updated_at\": \"2018-10-03 20:45:50\"\n   }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "String",
+            "optional": false,
+            "field": "erro",
+            "description": "<p>Mensagem de erro</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Exemplo de erro 1:",
+          "content": "{\n   \"erro\": \"A api só permite as flags 1 e 2 até o momento\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Exemplo de erro 2:",
+          "content": "{\n   \"erro\": \"Pessoa não encontrada\"\n}",
           "type": "json"
         }
       ]

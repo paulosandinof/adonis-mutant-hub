@@ -66,16 +66,17 @@ adonis serve --dev
 
 ## Endpoints da API
 
+Toda a documentação das rotas estão na pasta `apidoc` dentro do projeto. Basta abrir no navegador o arquivo `index.html`
+
 - get    /pessoas
 - post   /pessoas
 - get    /pessoas/:pessoa_id
 - get    /pessoas/:pessoa_id/relatorios
 - put    /pessoas/:pessoa_id
 - delete /pessoas/:pessoa_id
+
 - get    /relatorios
 - get    /relatorios/porcentagem
 - post   /relatorios/:pessoa_id/:flag_mutacao
 - get    /relatorios/:relatorio_id
 - get    /relatorios/:relatorio_id/pessoa
-
-- TODO: Conferir os endpoints e verificar a flag das doenças

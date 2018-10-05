@@ -111,13 +111,27 @@ class RelatorioController {
    *        "updated_at": "2018-10-03 20:45:50"
    *    }
    * }
+   * 
+   * @apiError {String} erro Mensagem de erro
+   * @apiErrorExample Exemplo de erro 1:
+   * {
+   *    "erro": "A api só permite as flags 1 e 2 até o momento"
+   * }
+   * @apiErrorExample Exemplo de erro 2:
+   * {
+   *    "erro": "Pessoa não encontrada"
+   * }
    */
   async store ({ params, request, response }) {
     
+    if(!(params.flag_mutacao === 1 || params.flag_mutacao === 2)){
+      return response.status(400).json({
+        erro: "A api só permite as flags 1 e 2 até o momento"
+      })
+    }
+
     // Acha a pessoa na tabela de pessoas
     const pessoa = await Pessoa.find(params.pessoa_id)
-
-    if(params.flag_mutacao )
 
     if(pessoa){
       // Cria um novo relatório

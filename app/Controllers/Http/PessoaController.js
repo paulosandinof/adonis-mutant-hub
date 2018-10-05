@@ -138,7 +138,7 @@ class PessoaController {
    * @apiError {String} erro Mensagem de erro
    * @apiErrorExample Exemplo de erro:
    * {
-   *    "erro": "Usuário não encontrado"
+   *    "erro": "Pessoa não encontrada"
    * }
    */
   async show ({ params, request, response }) {
@@ -187,7 +187,7 @@ class PessoaController {
    * @apiError {String} erro Mensagem de erro
    * @apiErrorExample Exemplo de erro:
    * {
-   *    "erro": "Usuário não encontrado"
+   *    "erro": "Pessoa não encontrada"
    * }
    */
   async showReports ({ params, request, response }) {
