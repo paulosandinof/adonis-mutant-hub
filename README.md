@@ -1,4 +1,4 @@
-# MutantHub API
+# Adonis Mutant Hub
 
 Projeto de uma API Rest para cadastrar usuários e reportá-los com mutação.
 
@@ -20,13 +20,13 @@ npm install @adonisjs/cli -g
 
 - Clone o repositório:
 ```bash
-git clone https://github.com/paulosandinof/MutantHub.git
+git clone https://github.com/paulosandinof/adonis_mutant_hub.git
 ```
 
-- Será criada a pasta do repositório chamada **MutantHub**, acesse 
+- Será criada a pasta do repositório chamada **adonis_mutant_hub**, acesse 
 esta pasta:
 ```bash
-cd MutantHub
+cd adonis_mutant_hub
 ```
 
 - Dentro desta pasta, instale as dependências do projeto:
@@ -34,12 +34,12 @@ cd MutantHub
 npm install
 ```
 
-- Na pasta haverá um arquivo `.env.example` que contém as informações do seu projeto, faça uma cópia deste arquivo removendo o `.example`:
+- Na pasta haverá um arquivo `.env.example` que contém as informações do seu projeto, faça uma cópia deste arquivo removendo o `.example` :
 ```bash
 cp .env.example ./.env
 ```
 
-- Neste novo arquivo criado, você precisará inserir as informações sobre o seu banco de dados:
+- Neste novo arquivo criado, insira as informações sobre o seu banco de dados:
 ```
 DB_CONNECTION=mysql
 DB_HOST=O endereço de host do seu banco de dados, geralmente 127.0.0.1
@@ -49,12 +49,12 @@ DB_PASSWORD= A senha do seu banco de dados
 DB_DATABASE= O nome do banco schema que você criou para o projeto
 ```
 
-- Após configurar o banco de dados, você precisará gerar uma `APP_KEY` para o seu arquivo `.env`, para isso:
+- Após configurar o banco de dados, gere uma `APP_KEY` para o arquivo `.env` :
 ```
 adonis key:generate
 ```
 
-- Configurado o arquivo `.env`, você precisará criar as migrations do projeto para criar as tabelas no banco de dados:
+- Configurado o arquivo `.env`, crie as migrations do projeto para gerar as tabelas no banco de dados:
 ```bash
 adonis migration:run
 ```
@@ -64,9 +64,11 @@ adonis migration:run
 adonis serve --dev
 ```
 
-## Endpoints da API
+## Documentação da API
 
-Toda a documentação das rotas estão na pasta `apidoc` dentro do projeto. Basta abrir no navegador o arquivo `index.html`
+https://paulosandinof.github.io/adonis_mutant_hub/
+
+Endpoints:
 
 - get    /pessoas
 - post   /pessoas
