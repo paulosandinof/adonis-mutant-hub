@@ -1,14 +1,14 @@
 {
-  "title": "MutantHub ApiDoc",
-  "name": "mutanthub-api",
+  "title": "Adonis Mutant Hub Docs",
+  "name": "adonis_mutant_hub",
   "version": "1.0.0",
-  "description": "Uma Api para cadastrar pessoas, cadastrar relatos sobre pessoas que estão com mutações e gerar relatórios sobre a população",
+  "description": "Projeto de uma API Rest para cadastrar usuários e reportá-los com mutação.",
   "sampleUrl": false,
   "defaultVersion": "0.0.0",
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2018-10-05T00:57:14.023Z",
+    "time": "2018-10-13T19:21:09.690Z",
     "url": "http://apidocjs.com",
     "version": "0.17.6"
   }
