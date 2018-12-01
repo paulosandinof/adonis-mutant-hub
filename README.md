@@ -66,7 +66,7 @@ adonis serve --dev
 
 ## Documentação da API
 
-https://paulosandinof.github.io/adonis_mutant_hub/
+https://paulosandinof.github.io/adonis-mutant-hub/
 
 Endpoints:
 
