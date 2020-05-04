@@ -1,23 +1,28 @@
 {
-  "name": "adonis_mutant_hub",
+  "name": "adonis-mutant-hub",
+  "description": "Projeto de uma API Rest para cadastrar usuários e reportá-los com mutação.",
   "version": "1.0.0",
   "adonis-version": "4.1.0",
-  "description": "Projeto de uma API Rest para cadastrar usuários e reportá-los com mutação.",
-  "apidoc":{
-    "title": "Adonis Mutant Hub Docs"
-  },
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "test": "node ace test"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paulosandinof/adonis-mutant-hub"
+  },
   "keywords": [
-    "adonisjs",
-    "adonis-app"
+    "Javascript",
+    "JS",
+    "Adonis"
   ],
-  "author": "",
-  "license": "UNLICENSED",
-  "private": true,
+  "author": "Paulo Sandino",
+  "license": "MIT",
+  "homepage": "https://paulosandinof.github.io/adonis-mutant-hub/",
+  "apidoc":{
+    "title": "Adonis Mutant Hub Docs"
+  },
   "dependencies": {
     "@adonisjs/ace": "^5.0.2",
     "@adonisjs/auth": "^3.0.5",
@@ -32,5 +37,5 @@
   "devDependencies": {},
   "autoload": {
     "App": "./app"
-  }
+  },
 }
